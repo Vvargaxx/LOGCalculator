@@ -2,10 +2,9 @@ import java.util.Scanner;
 import java.lang.Math;
 public class LogCalculator
 {
-	public static void main(String[] args) {
-		
+	public static void main(String[] args) {		
 		Scanner sc = new Scanner(System.in);
-	    while (true){	
+	    	while (true){	
 		    System.out.println("Tell me if want to calculate a LOG or a DEC, or EXIT");
 		    String request = sc.nextLine().toUpperCase();
 		
@@ -28,6 +27,6 @@ public class LogCalculator
 		    }
 		    System.out.println();
 		    sc.nextLine();
-	    }	
+	    	}	
 	}
 }
