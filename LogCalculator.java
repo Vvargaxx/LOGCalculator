@@ -4,16 +4,19 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class LogCalculator extends JFrame
+public class LogCalculator extends JFrame implements ActionListener
 {
 	private JTextField cantidad;
 	private JLabel resultLabel;
+	private JButton boton1, boton2;
 	private String resultado;
 	
 	public LogCalculator() {
 		super("Log - Dec Calculator"); 
-		JButton boton1 = new JButton("A Decimal"); 
-		JButton boton2 = new JButton("A Logaritmo"); 
+		boton1 = new JButton("A Decimal"); 
+		boton2 = new JButton("A Logaritmo"); 
+		boton1.addActionListener(this); 
+		boton2.addActionListener(this); 
 		cantidad = new JTextField(10); 
 		JLabel text = new JLabel("Introduce el número a calcular"); 
 		add(text); 
@@ -23,8 +26,6 @@ public class LogCalculator extends JFrame
 		resultLabel = new JLabel(resultado);		//Etiqueta con el resultado, inicialmente vacía
 		add(resultLabel);
 		setLayout(new FlowLayout()); 			//Layout por defecto, de izquierda a derecha
-		boton1.addActionListener(new BtListener()); 
-		boton2.addActionListener(new BtListener()); 
 		setSize(600, 300);				//Tamaño ventana
 		setLocationRelativeTo(null); 			//Ventana en el centro de la pantalla
 		setVisible(true);				//Ventana visible
@@ -36,9 +37,9 @@ public class LogCalculator extends JFrame
 		LogCalculator lc = new LogCalculator();
 	}
 	
-	class BtListener implements ActionListener { 	// Button Listener
-
-		public void actionPerformed(ActionEvent ae) {			
+	public void actionPerformed(ActionEvent ae) {			
+		 if (ae.getSource() == boton1 || ae.getSource() == boton2) {   
+		    try {
 			float valor = Float.parseFloat(cantidad.getText()); 	// Número introducido
 			String s = (String)ae.getActionCommand(); 		// Texto del botón pulsado
 
@@ -52,10 +53,9 @@ public class LogCalculator extends JFrame
 				resultado = "El resultado Decimal es: "+ String.format("%.03f", valor);
 				resultLabel.setText(resultado); 
 			} 
-			
-		} 
-	}
+		    } catch (NumberFormatException e) {
+		    	JOptionPane.showMessageDialog(this, "Por favor ingrese un número o un logaritmo válido.", "Error", JOptionPane.ERROR_MESSAGE);
+		    }
+	       }	
+	}	
 }
-
-
-
